@@ -43,5 +43,4 @@ public abstract class Character {
         isAlive = alive;
     }
 
-    public abstract void setHp();
 }
