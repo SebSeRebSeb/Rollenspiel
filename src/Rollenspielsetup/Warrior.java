@@ -15,7 +15,7 @@ public class Warrior extends Character {
     }
 
     public Warrior(int id, String name, int hp, int stamina, int strength) {
-        super(id, name);
+        super(id, name, hp);
         this.stamina = stamina;
         this.strength = strength;
         setHp(hp);

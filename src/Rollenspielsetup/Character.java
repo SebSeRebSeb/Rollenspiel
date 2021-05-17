@@ -13,7 +13,7 @@ public abstract class Character {
         this.isAlive = true;
     }
 
-    public Character(int id, String name) {
+    public Character(int id, String name, int hp) {
         setId(id);
         setName(name);
         this.isAlive = true;
@@ -41,6 +41,9 @@ public abstract class Character {
 
     public void setAlive(boolean alive) {
         isAlive = alive;
+    }
+
+    public void setHp(){
     }
 
 }
