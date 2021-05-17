@@ -9,6 +9,7 @@ public class Wizard extends Character {
 
     public Wizard(String name) {
         super(name);
+        setHp();
         setMana();
         setIntelligence();
     }
