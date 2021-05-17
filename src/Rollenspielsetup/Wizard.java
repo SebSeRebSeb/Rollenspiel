@@ -14,8 +14,8 @@ public class Wizard extends Character {
         setIntelligence();
     }
 
-    public Wizard(int id, String name, int hp) {
-        super(id, name, hp);
+    public Wizard( String name, int hp) {
+        super(name, hp);
         setMana();
         setIntelligence();
     }

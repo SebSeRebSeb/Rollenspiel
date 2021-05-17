@@ -1,30 +1,30 @@
 package Rollenspielsetup;
 
+import java.util.UUID;
+
 public abstract class Character {
 
-    private int id;
+    private String id = UUID.randomUUID().toString();;
     private String name;
     protected int hp;
     private boolean isAlive;
+    private int start = 0;
 
     public Character(String name) {
-        setId(id);
+
         setName(name);
         this.isAlive = true;
     }
 
-    public Character(int id, String name, int hp) {
-        setId(id);
+    public Character(String name, int hp) {
+
         setName(name);
+        setHp(hp);
         this.isAlive = true;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -43,7 +43,11 @@ public abstract class Character {
         isAlive = alive;
     }
 
-    public void setHp(){
+    public void setHp(int hp) {
+        this.hp=hp;
+    }
+    public  void setHp(){
+
     }
 
 }

@@ -7,8 +7,8 @@ public class Main {
 
 
 
-        System.out.println(steve.getHp());
-        System.out.println(steve4.getHp());
+        System.out.println(steve.getId());
+        System.out.println(steve4.getId());
 
     }
 }
