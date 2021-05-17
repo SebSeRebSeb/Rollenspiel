@@ -7,7 +7,7 @@ public abstract class Character {
     private String id = UUID.randomUUID().toString();;
     private String name;
     protected int hp;
-    private boolean isAlive;
+    protected boolean isAlive;
     private int start = 0;
 
     public Character(String name) {

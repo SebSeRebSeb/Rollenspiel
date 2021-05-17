@@ -10,5 +10,8 @@ public class Main {
         System.out.println(steve.getId());
         System.out.println(steve4.getId());
 
+        System.out.println(steve4.getStrength());
+        steve.takeDamage(steve4.attack());
+
     }
 }

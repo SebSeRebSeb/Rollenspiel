@@ -2,14 +2,14 @@ package Rollenspielsetup;
 
 import java.util.Random;
 
-public class Warrior extends Character {
+public class Warrior extends Character implements Attacker{
     private int stamina;
     private int strength;
     private Random rand;
 
     public Warrior(String name) {
         super(name);
-        setStamina(stamina);
+        setStamina();
         setStrength(strength);
         setHp();
     }
@@ -21,12 +21,41 @@ public class Warrior extends Character {
         setHp();
     }
 
+    // Attack methods
+
+    @Override
+    public int attack() {
+        int damage;
+        if(stamina >= 5) {
+            damage = strength;
+            stamina -= 5;
+            System.out.println(this.getName() + " attacks you with a Heavy Attack for " + damage + " of damage!");
+        } else {
+            damage = strength/2;
+            System.out.println(this.getName() + " attacks you with a Weak Attack for " + damage + " of damage!");
+        }
+        return damage;
+    }
+
+    @Override
+    public void takeDamage(int damage){
+        hp -= damage;
+        if(hp <= 0) {
+            setAlive(false);
+            System.out.println(this.getName() + " has been slaughtered!");
+        }
+    }
+
+
+    //setter + getter
+
     public int getStamina() {
         return stamina ;
     }
 
-    public void setStamina(int stamina) {
-        this.stamina = 10+rand.nextInt(41);
+    public void setStamina() {
+        Random random = new Random();
+        this.stamina = 10+random.nextInt(41);
     }
 
     public int getStrength() {
@@ -34,7 +63,8 @@ public class Warrior extends Character {
     }
 
     public void setStrength(int strength) {
-        this.strength = 1+rand.nextInt(10);
+        Random random = new Random();
+        this.strength = 1+random.nextInt(10);
     }
 
 

@@ -4,5 +4,5 @@ public interface Attacker {
 
     public int attack();
     
-    public int takeDamage(int damage);
+    public void takeDamage(int damage);
 }
