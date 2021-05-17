@@ -22,11 +22,11 @@ public class Warrior extends Character {
     }
 
     public int getStamina() {
-        return stamina;
+        return stamina ;
     }
 
     public void setStamina(int stamina) {
-        this.stamina = stamina;
+        this.stamina = 10+rand.nextInt(41);
     }
 
     public int getStrength() {
@@ -34,14 +34,14 @@ public class Warrior extends Character {
     }
 
     public void setStrength(int strength) {
-        this.strength = strength;
+        this.strength = 1+rand.nextInt(10);
     }
 
 
     @Override
     public void setHp(){
         Random random = new Random();
-        int hp = 100+random.nextInt(100);
+        int hp = 100+random.nextInt(101);
         this.hp = hp;
     }
 
