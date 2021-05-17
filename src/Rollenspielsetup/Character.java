@@ -4,7 +4,7 @@ public abstract class Character {
 
     private int id;
     private String name;
-    private int hp;
+    protected int hp;
     private boolean isAlive;
 
     public Character(String name) {
@@ -51,4 +51,6 @@ public abstract class Character {
     public void setAlive(boolean alive) {
         isAlive = alive;
     }
+
+    public abstract void setHp();
 }
