@@ -23,6 +23,18 @@ public abstract class Character {
         this.isAlive = true;
     }
 
+
+    // Methods
+    public void takeDamage(int damage) {
+        setHp(getHp()-damage);
+        if(getHp() <= 0) {
+            setAlive(false);
+            System.out.println(getName() + " has been slaughtered!");
+        }
+    }
+
+    // setters + getters
+
     public String getId() {
         return id;
     }
@@ -46,8 +58,12 @@ public abstract class Character {
     public void setHp(int hp) {
         this.hp=hp;
     }
-    public  void setHp(){
+
+    public void setHp(){
 
     }
 
+    public int getHp() {
+        return hp;
+    }
 }

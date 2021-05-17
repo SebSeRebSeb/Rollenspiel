@@ -8,7 +8,13 @@ public class Main {
         ArrayList<Character> partyTwo = new ArrayList<>();
         Menu menu = new Menu();
         Wizard steve = new Wizard("Steve");
-        Warrior steve4 = new Warrior("Steve4");
+        Warrior klaus = new Warrior("Klaus");
+
+//        -- Loop to see how Attack-Method works --
+//        while(klaus.isAlive()){
+//            steve.attack(klaus);
+//        }
+
 
         menu.startMenu(partyOne,partyTwo);
 

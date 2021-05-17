@@ -21,29 +21,21 @@ public class Warrior extends Character implements Attacker{
         setHp();
     }
 
-    // Attack methods
+    // Attack method
 
     @Override
-    public int attack() {
+    public void attack(Character character) {
         int damage;
-        if(stamina >= 5) {
-            damage = strength;
-            stamina -= 5;
-            System.out.println(this.getName() + " attacks you with a Heavy Attack for " + damage + " of damage!");
+        if(this.stamina >= 5) {
+            damage = this.getStrength();
+            this.stamina -= 5;
+            System.out.println(this.getName() + " attacks " + character.getName() + " with a Heavy Attack for " + damage + " of damage!");
         } else {
-            damage = strength/2;
-            System.out.println(this.getName() + " attacks you with a Weak Attack for " + damage + " of damage!");
+            damage = (this.getStrength())/2;
+            this.stamina +=1;
+            System.out.println(this.getName() + " attacks " + character.getName() + " with a Weak Attack for " + damage + " of damage!");
         }
-        return damage;
-    }
-
-    @Override
-    public void takeDamage(int damage){
-        hp -= damage;
-        if(hp <= 0) {
-            setAlive(false);
-            System.out.println(this.getName() + " has been slaughtered!");
-        }
+        character.takeDamage(damage);
     }
 
 

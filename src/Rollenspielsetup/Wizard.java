@@ -20,32 +20,22 @@ public class Wizard extends Character implements Attacker{
         setIntelligence();
     }
 
-    //Attack Methods
+    //Attack Method
     @Override
-    public int attack() {
+    public void attack(Character character) {
         int damage;
-        if(mana >= 5) {
-            damage = intelligence;
-            mana -= 5;
-            System.out.println(this.getName() + " attacks you with a Fireball for " + damage + " of damage!");
+        if(this.mana >= 5) {
+            damage = this.getIntelligence();
+            this.mana -= 5;
+            System.out.println(this.getName() + " attacks " + character.getName() + " with a Fireball for " + damage + " of damage!");
         } else {
             damage = 2;
-            mana += 1;
-            System.out.println(this.getName() + " attacks you with a Staff Hit for " + damage + " of damage!");
+            this.mana += 1;
+            System.out.println(this.getName() + " attacks " + character.getName() + " with a Staff Hit for " + damage + " of damage!");
         }
-        return damage;
+        character.takeDamage(damage);
     }
 
-
-
-    @Override
-    public void takeDamage(int damage){
-        hp -= damage;
-        if(hp <= 0) {
-            setAlive(false);
-            System.out.println(this.getName() + " has been slaughtered!");
-        }
-    }
 
     // getter + setter
     public void setMana() {
