@@ -9,36 +9,49 @@ public class Warrior extends Character {
 
     public Warrior(String name) {
         super(name);
-        setStamina();
-        setStrength();
+        setStamina(stamina);
+        setStrength(strength);
         setHp();
     }
 
-    public Warrior(int id, String name, int hp) {
+    public Warrior(int id, String name, int hp, int stamina, int strength) {
         super(id, name, hp);
-        setStamina();
-        setStrength();
+        this.stamina = stamina;
+        this.strength = strength;
+        setHp();
     }
 
     public int getStamina() {
         return stamina;
     }
 
-    public void setStamina() {
-        this.stamina = 10+rand.nextInt(40);
+    public void setStamina(int stamina) {
+        this.stamina = stamina;
     }
 
     public int getStrength() {
         return strength;
     }
 
-    public void setStrength() {
-        this.strength = 1+rand.nextInt(9);
+    public void setStrength(int strength) {
+        this.strength = strength;
     }
 
+
+    @Override
     public void setHp(){
-        this.hp = rand.nextInt(100)+100;
+        Random random = new Random();
+        int hp = 100+random.nextInt(100);
+        this.hp = hp;
     }
+
+//    public void setHp(){
+//        if((hp>=100)&&(hp<=200)) {
+//            this.hp=hp;
+//        } else {
+//            this.hp = rand.nextInt(100)+100;
+//        }
+//    }
 
     public int getHp(){
         return this.hp;

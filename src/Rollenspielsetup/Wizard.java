@@ -35,14 +35,18 @@ public class Wizard extends Character {
     @Override
     public void setHp(){
         Random random = new Random();
-        int hp = 50+random.nextInt(100);
+        int hp = 50+random.nextInt(50);
         this.hp = hp;
+    }
+    public int getHp(){
+        return this.hp;
     }
 
 
     public int getMana() {
         return this.mana;
     }
+
 
     public int getIntelligence() {
         return this.intelligence;

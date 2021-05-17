@@ -8,7 +8,7 @@ public abstract class Character {
     private boolean isAlive;
 
     public Character(String name) {
-        setId(id++);
+        setId(id);
         setName(name);
         this.isAlive = true;
     }
