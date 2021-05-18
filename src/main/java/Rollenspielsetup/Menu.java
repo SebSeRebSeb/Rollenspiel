@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Menu {
 
-    public void startMenu(ArrayList<Character> partyOne, ArrayList<Character> partyTwo){
+    public void startMenu(Party partyOne, Party partyTwo){
         Scanner sc = new Scanner(System.in);
         boolean isValidInput=false;
 
@@ -54,7 +54,7 @@ public class Menu {
         System.out.println("");
     }
 
-    public void createParty(ArrayList<Character> partyOne, ArrayList<Character> partyTwo){
+    public void createParty(Party partyOne, Party partyTwo){
         Scanner sc = new Scanner(System.in);
         Integer groupSize;
         String userInput = "";
@@ -98,7 +98,7 @@ public class Menu {
         }
     }
 
-    public void addCharactertoParty(ArrayList<Character> party){
+    public void addCharactertoParty(Party party){
         Scanner sc = new Scanner(System.in);
         String inputType;
         String name;
@@ -115,7 +115,7 @@ public class Menu {
                 System.out.println("Wizard "+ name + " was created!");
                 break;
             case "2":
-                Warrior warrior= new Warrior(name, 12, 12, 12);
+                Warrior warrior= new Warrior(name);
                 party.add(warrior);
                 System.out.println("Warrior "+ name + " was created!");
                 break;
@@ -124,16 +124,25 @@ public class Menu {
         }
     }
 
-    public Character chooseCharacter(ArrayList<Character> party){
+    public Character chooseCharacter(Party party){
         Scanner sc = new Scanner(System.in);
         Integer inputNumber;
         System.out.println("Choose your fighter:");
-        for(int i=0;i<party.size();i++){
-            System.out.println((i+1)+". Character " + party.get(i).getName() + " (Type: "+ getType(party.get(i))+")");
+        for(int i=0;i<party.getParty().size();i++){
+            System.out.println((i+1)+". Character " + party.getParty().get(i).getName() + " (Type: "+ getType(party.getParty().get(i))+")");
+            if(party.getParty().get(i) instanceof Warrior) {
+                System.out.println("HP:" + party.getParty().get(i).getHp() + "|Stamina:" +
+                                    ((Warrior) party.getParty().get(i)).getStamina() + "|Strength:" +
+                                    ((Warrior) party.getParty().get(i)).getStrength());
+            } else {
+                System.out.println("HP:" + party.getParty().get(i).getHp() + "|Mana:" +
+                                    ((Wizard) party.getParty().get(i)).getMana() + "|Intelligence:" +
+                                    ((Wizard) party.getParty().get(i)).getIntelligence());
+            }
         }
-        System.out.print("Choose a fighter (Input: 1-"+party.size()+"):");
+        System.out.print("Choose a fighter (Input: 1-"+party.getParty().size()+"):");
         inputNumber=Integer.parseInt(sc.next());
-        return(party.get(inputNumber-1));
+        return(party.getParty().get(inputNumber-1));
     }
 
     public String getType(Character character){
