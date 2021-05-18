@@ -126,4 +126,17 @@ class PartyTest {
         assertTrue(party3.getParty().get(2) instanceof Wizard);
     }
 
+    @Test
+    void testimportexport(){
+        Party party3 = new Party();
+
+        String inputString = "e92c8026-4766-4be1-8b4e-bc3d0f073c27;Frank;120;12;9;Warrior\n"+
+                "e924e2f6-04a0-4bd7-9a7b-dcec508dee81;Peter;130;30;7;Warrior\n"+
+                "f0c2340f-aad0-495a-baaa-4fc19a30d797;Paul;50;45;6;Wizard\n"+
+                "3e57a942-841e-4e0a-a1cf-d7df7ce5d6e1;Karl;60;50;10;Wizard\n";
+
+        party3.importParty(inputString);
+        assertEquals(inputString,party3.exportParty());
+    }
+
 }

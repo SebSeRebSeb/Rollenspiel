@@ -55,5 +55,21 @@ public class Party {
         }
     }
 
-
+    public String exportParty(){
+        //initialisiere ausgabe
+        String ausgabe = "";
+        for (int j=0; j<this.party.size();j++){
+            if(this.party.get(j) instanceof Warrior) {
+                ausgabe = ausgabe + this.party.get(j).getId() + ";" + this.party.get(j).getName() +";" +
+                                    this.party.get(j).getHp() + ";" + ((Warrior) this.party.get(j)).getStamina() + ";" +
+                                    ((Warrior) this.party.get(j)).getStrength() + ";Warrior\n";
+            }
+            if(this.party.get(j) instanceof Wizard) {
+                ausgabe = ausgabe + this.party.get(j).getId() + ";" + this.party.get(j).getName() +";" +
+                        this.party.get(j).getHp() + ";" + ((Wizard) this.party.get(j)).getMana() + ";" +
+                        ((Wizard) this.party.get(j)).getIntelligence() + ";Wizard\n";
+            }
+        }
+        return ausgabe;
+    }
 }
