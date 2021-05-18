@@ -4,11 +4,10 @@ import java.util.UUID;
 
 public abstract class Character {
 
-    private String id = UUID.randomUUID().toString();;
+    private String id = UUID.randomUUID().toString();
     private String name;
     protected int hp;
     protected boolean isAlive;
-    private int start = 0;
 
     public Character(String name) {
 
@@ -26,8 +25,8 @@ public abstract class Character {
 
     // Methods
     public void takeDamage(int damage) {
-        setHp(getHp()-damage);
-        if(getHp() <= 0) {
+        setHp(getHp() - damage);
+        if (getHp() <= 0) {
             setAlive(false);
             System.out.println(getName() + " has been slaughtered!");
         }
@@ -56,10 +55,10 @@ public abstract class Character {
     }
 
     public void setHp(int hp) {
-        this.hp=hp;
+        this.hp = hp;
     }
 
-    public void setHp(){
+    public void setHp() {
 
     }
 

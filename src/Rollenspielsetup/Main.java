@@ -10,8 +10,8 @@ public class Main {
         Wizard steve = new Wizard("Steve");
         Warrior klaus = new Warrior("Klaus");
 
-//        -- Loop to see how Attack-Method works --
-//        while(klaus.isAlive()){
+        //  -- Loop to see how Attack-Method works --
+//        while (klaus.isAlive()) {
 //            steve.attack(klaus);
 //        }
 

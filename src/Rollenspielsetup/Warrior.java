@@ -5,20 +5,20 @@ import java.util.Random;
 public class Warrior extends Character implements Attacker{
     private int stamina;
     private int strength;
-    private Random rand;
 
     public Warrior(String name) {
         super(name);
         setStamina();
-        setStrength(strength);
+        setStrength();
         setHp();
     }
 
     public Warrior(String name, int hp, int stamina, int strength) {
-        super(name, hp);
+        super(name);
         this.stamina = stamina;
         this.strength = strength;
-        setHp();
+        setHp(hp);
+        //Setter mit Propertyprüfung ergänzen
     }
 
     // Attack method
@@ -54,7 +54,7 @@ public class Warrior extends Character implements Attacker{
         return strength;
     }
 
-    public void setStrength(int strength) {
+    public void setStrength() {
         Random random = new Random();
         this.strength = 1+random.nextInt(10);
     }

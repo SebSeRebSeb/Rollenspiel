@@ -15,9 +15,11 @@ public class Wizard extends Character implements Attacker{
     }
 
     public Wizard( String name, int hp) {
-        super(name, hp);
+        super(name);
         setMana();
         setIntelligence();
+        setHp();
+        //add Propertyprüfung
     }
 
     //Attack Method
