@@ -25,7 +25,7 @@ public class Menu {
                 case "C":
                     isValidInput=true;
                     System.out.println("Party will be created!");
-                    CreateParty(partyOne, partyTwo);
+                    createParty(partyOne, partyTwo);
                     break;
                 case "L":
                     isValidInput=true;
@@ -54,7 +54,7 @@ public class Menu {
         System.out.println("");
     }
 
-    public void CreateParty(ArrayList<Character> partyOne, ArrayList<Character> partyTwo){
+    public void createParty(ArrayList<Character> partyOne, ArrayList<Character> partyTwo){
         Scanner sc = new Scanner(System.in);
         Integer groupSize;
         String userInput = "";

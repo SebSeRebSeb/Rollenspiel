@@ -1,5 +1,4 @@
-package Rollenspielsetup;
-
+import Rollenspielsetup.Warrior;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
