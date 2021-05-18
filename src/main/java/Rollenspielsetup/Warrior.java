@@ -50,7 +50,7 @@ public class Warrior extends Character implements Attacker{
         this.stamina = 10+random.nextInt(41);
     }
     public void setStamina(int stamina){
-        if (stamina >=10 && stamina <41){
+        if (stamina >=10 && stamina <51){
             this.stamina = stamina;
         }else {
             setStamina();
