@@ -115,7 +115,7 @@ public class Menu {
                 System.out.println("Wizard "+ name + " was created!");
                 break;
             case "2":
-                Warrior warrior= new Warrior(name);
+                Warrior warrior= new Warrior(name, 12, 12, 12);
                 party.add(warrior);
                 System.out.println("Warrior "+ name + " was created!");
                 break;

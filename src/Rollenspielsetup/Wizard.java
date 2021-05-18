@@ -14,12 +14,11 @@ public class Wizard extends Character implements Attacker{
         setIntelligence();
     }
 
-    public Wizard( String name, int hp) {
+    public Wizard( String name, int hp, int mana, int intelligence) {
         super(name);
-        setMana();
-        setIntelligence();
-        setHp();
-        //add Propertyprüfung
+        setMana(mana);
+        setIntelligence(intelligence);
+        setHp(hp);
     }
 
     //Attack Method
@@ -42,22 +41,48 @@ public class Wizard extends Character implements Attacker{
     // getter + setter
     public void setMana() {
         Random random = new Random();
-        int mana = 10+random.nextInt(50);
+        int mana = 10+random.nextInt(51);
         this.mana = mana;
     }
+    public void setMana(int mana){
+        if (mana >=10 && mana <51){
+            this.mana = mana;
+        }else {
+            setMana();
+            System.out.println("The entered mana was not in the given parameters. It was randomly set between 10 and 50");
+        }
+    }
+
 
     public void setIntelligence(){
         Random random = new Random();
-        int intelligence = 1+random.nextInt(50);
+        int intelligence = 1+random.nextInt(51);
         this.intelligence = intelligence;
 
     }
+    public void setIntelligence(int intelligence){
+        if (intelligence >=1 && intelligence <51){
+            this.intelligence = intelligence;
+        }else {
+            setIntelligence();
+            System.out.println("The entered intelligence was not in the given parameters. It was randomly set between 1 and 50");
+        }
+    }
+
 
     @Override
     public void setHp(){
         Random random = new Random();
-        int hp = 50+random.nextInt(50);
+        int hp = 50+random.nextInt(51);
         this.hp = hp;
+    }
+    public void setHp(int hp){
+        if (hp >=50 && hp <101){
+            this.hp = hp;
+        }else {
+            setHp();
+            System.out.println("The entered hp was not in the given parameters. It was randomly set between 50 and 100");
+        }
     }
     public int getHp(){
         return this.hp;

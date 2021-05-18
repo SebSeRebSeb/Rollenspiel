@@ -6,17 +6,17 @@ public class Warrior extends Character implements Attacker{
     private int stamina;
     private int strength;
 
-    public Warrior(String name) {
+    public Warrior(String name){
         super(name);
-        setStamina();
         setStrength();
+        setStamina();
         setHp();
     }
 
     public Warrior(String name, int hp, int stamina, int strength) {
         super(name);
-        this.stamina = stamina;
-        this.strength = strength;
+        setStamina(stamina);
+        setStrength(strength);
         setHp(hp);
         //Setter mit Propertyprüfung ergänzen
     }
@@ -49,6 +49,15 @@ public class Warrior extends Character implements Attacker{
         Random random = new Random();
         this.stamina = 10+random.nextInt(41);
     }
+    public void setStamina(int stamina){
+        if (stamina >=10 && stamina <41){
+            this.stamina = stamina;
+        }else {
+            setStamina();
+            System.out.println("The entered stamina was not in the given parameters. It was randomly set between 10 and 40");
+        }
+    }
+
 
     public int getStrength() {
         return strength;
@@ -57,6 +66,14 @@ public class Warrior extends Character implements Attacker{
     public void setStrength() {
         Random random = new Random();
         this.strength = 1+random.nextInt(10);
+    }
+    public void setStrength(int strength){
+        if (strength >=1 && strength <11){
+            this.strength = strength;
+        }else {
+            setStrength();
+            System.out.println("The entered strength was not in the given parameters. It was randomly set between 1 and 10");
+        }
     }
 
 
@@ -67,13 +84,14 @@ public class Warrior extends Character implements Attacker{
         this.hp = hp;
     }
 
-//    public void setHp(){
-//        if((hp>=100)&&(hp<=200)) {
-//            this.hp=hp;
-//        } else {
-//            this.hp = rand.nextInt(100)+100;
-//        }
-//    }
+    public void setHp(int hp){
+        if (hp >=100 && hp <201){
+            this.hp = hp;
+        }else {
+            setHp();
+            System.out.println("The entered hp was not in the given parameters. It was randomly set between 100 and 200");
+        }
+    }
 
     public int getHp(){
         return this.hp;
