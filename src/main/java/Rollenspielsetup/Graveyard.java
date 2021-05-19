@@ -17,18 +17,18 @@ public class Graveyard {
 
     public void died(Character deadChar) {
         this.graveyard.add(deadChar);
-        System.out.println("The " + deadChar.getClass() + " " + deadChar.getName() + "passes and is now in the Graveyard");
+        System.out.println(deadChar.getName() + " will be sent to the Graveyard.");
     }
 
     // function muss mit remove from party zusammen in Atack rein -> if hp =< 0
 
     public String seeCasualties() {
         String casualties = "In the big clash of forces died the following Characters: " + "\n";
-        String begin = null;
+        String begin = "";
         for (int i = 0; i < this.graveyard.size(); i++) {
 
             begin = begin + this.graveyard.get(i).getId() + ";" + this.graveyard.get(i).getName() + ";" +
-                    this.graveyard.get(i).getClass() + "\n";
+                    this.graveyard.get(i).getClass() + "\n";  // da müssen wir noch mal ran ggf. mit toString-Methode?
         }
         return  casualties + begin;
     }

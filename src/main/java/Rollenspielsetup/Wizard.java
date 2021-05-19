@@ -25,16 +25,24 @@ public class Wizard extends Character implements Attacker{
     @Override
     public void attack(Character character) {
         int damage;
-        if(this.mana >= 5) {
+        if (this.isAlive && this.mana >= 5) {
             damage = this.getIntelligence();
             this.mana -= 5;
             System.out.println(this.getName() + " attacks " + character.getName() + " with a Fireball for " + damage + " of damage!");
-        } else {
+        } else if (this.isAlive){
             damage = 2;
             this.mana += 1;
             System.out.println(this.getName() + " attacks " + character.getName() + " with a Staff Hit for " + damage + " of damage!");
+        } else {
+            damage = 0;
         }
-        character.takeDamage(damage);
+        //damage taken by input character
+        character.hp = character.getHp() - damage;
+        if (character.getHp() <= 0) {
+            character.setAlive(false);
+            System.out.println(character.getName() + " has been slaughtered!");
+        }
+        //
     }
 
 
@@ -76,6 +84,7 @@ public class Wizard extends Character implements Attacker{
         int hp = 50+random.nextInt(51);
         this.hp = hp;
     }
+    @Override
     public void setHp(int hp){
         if (hp >=50 && hp <101){
             this.hp = hp;

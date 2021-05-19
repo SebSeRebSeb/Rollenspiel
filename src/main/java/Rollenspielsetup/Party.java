@@ -29,7 +29,7 @@ public class Party {
         if(this.party.contains(character)) {
             this.party.remove(character);
         } else {
-            System.out.println("Der Charakter existiert nicht!");
+            System.out.println("Character doesn't exist!");
         }
     }
 
@@ -50,7 +50,7 @@ public class Party {
                    this.party.add(wizard);
                    break;
                default:
-                   System.err.println("Charaktertyp exisitiert nicht!");
+                   System.err.println("Character type doesn't exist!");
            }
         }
     }

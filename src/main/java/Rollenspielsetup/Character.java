@@ -23,15 +23,6 @@ public abstract class Character {
     }
 
 
-    // Methods
-    public void takeDamage(int damage) {
-        setHp(getHp() - damage);
-        if (getHp() <= 0) {
-            setAlive(false);
-            System.out.println(getName() + " has been slaughtered!");
-        }
-    }
-
     // setters + getters
 
     public String getId() {
@@ -69,4 +60,6 @@ public abstract class Character {
     public int getHp() {
         return hp;
     }
+
+    public abstract void attack(Character character);
 }

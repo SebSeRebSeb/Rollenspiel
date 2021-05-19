@@ -22,22 +22,27 @@ public class Warrior extends Character implements Attacker{
     }
 
     // Attack method
-
     @Override
     public void attack(Character character) {
         int damage;
-        if(this.stamina >= 5) {
+        if(this.isAlive && this.stamina >= 5) {
             damage = this.getStrength();
             this.stamina -= 5;
             System.out.println(this.getName() + " attacks " + character.getName() + " with a Heavy Attack for " + damage + " of damage!");
-        } else {
+        } else if (this.isAlive) {
             damage = (this.getStrength())/2;
             this.stamina +=1;
             System.out.println(this.getName() + " attacks " + character.getName() + " with a Weak Attack for " + damage + " of damage!");
+        } else {
+            damage = 0;
         }
-        character.takeDamage(damage);
+        //damage taken by input character
+        character.hp = character.getHp() - damage;
+        if (character.getHp() <= 0) {
+            character.setAlive(false);
+            System.out.println(character.getName() + " has been slaughtered!");
+        }
     }
-
 
     //setter + getter
 
@@ -83,7 +88,7 @@ public class Warrior extends Character implements Attacker{
         int hp = 100+random.nextInt(101);
         this.hp = hp;
     }
-
+    @Override
     public void setHp(int hp){
         if (hp >=100 && hp <201){
             this.hp = hp;
