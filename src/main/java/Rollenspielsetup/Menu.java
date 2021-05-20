@@ -70,7 +70,7 @@ public class Menu {
             System.out.println("###################The fight starts!#########################");
             System.out.println("#############################################################");
             System.out.println("");
-        // let characters fight
+            // let characters fight
             fight(char1, char2, graveyard, partyOne, partyTwo);
         }
         System.out.println("");
@@ -149,6 +149,7 @@ public class Menu {
         partyTwo.importParty("partyTwo.csv");
         System.out.println("Party Two has been successfully imported!");
     }
+
     // export party to csv-file
     public void exportParty(Party partyOne, Party partyTwo) {
         Scanner sc = new Scanner(System.in);
@@ -205,7 +206,8 @@ public class Menu {
         }
 
     }
-// add a Character to a certain party, User Input to decide whether Wizard (1) or Warrior (2) is created
+
+    // add a Character to a certain party, User Input to decide whether Wizard (1) or Warrior (2) is created
     public void addCharactertoParty(Party party) {
         Scanner sc = new Scanner(System.in);
         String inputType;
@@ -259,11 +261,18 @@ public class Menu {
             // incl. check input for validity
             while (!validInput) {
                 System.out.print("Choose a fighter (Input: 1-" + party.getParty().size() + "):");
-                inputNumber = Integer.parseInt(sc.next());
-                if(inputNumber > 0 && inputNumber <= party.getParty().size()){
-                System.out.println("You have chosen " + party.getParty().get(inputNumber - 1).getName() + "!");
-                validInput = true;
-                return (party.getParty().get(inputNumber - 1));}
+                String zwischenSpeicher= sc.next();
+                if (isNumeric(zwischenSpeicher)) {
+                    inputNumber=Integer.parseInt(zwischenSpeicher);
+                    if (inputNumber > 0 && inputNumber <= party.getParty().size()) {
+                        System.out.println("You have chosen " + party.getParty().get(inputNumber - 1).getName() + "!");
+                        return (party.getParty().get(inputNumber - 1));
+                    }
+                }else{
+                    System.out.println("Input not accepted. Only NUMERIC values!!");
+                }
+
+
             }
         } else {
             // if only one Character, Character is automatically chosen
