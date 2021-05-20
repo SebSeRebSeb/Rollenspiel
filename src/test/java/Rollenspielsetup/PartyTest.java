@@ -136,7 +136,7 @@ class PartyTest {
                 "3e57a942-841e-4e0a-a1cf-d7df7ce5d6e1;Karl;60;50;10;Wizard\n";
 
         party3.importParty(inputString);
-        assertEquals(inputString,party3.exportParty());
+        assertEquals(inputString,party3.exportParty("test"));
     }
 
 }

@@ -1,6 +1,7 @@
 package Rollenspielsetup;
 
 
+import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -23,11 +24,12 @@ public class Menu {
         System.out.println("3) Random fight (R)");
         while (!isValidInput) {
             System.out.print("User-Input: ");
-            switch (sc.next()) {
+            switch (sc.next().toUpperCase()) {
                 case "C":
                     isValidInput = true;
                     System.out.println("Party will be created!");
                     createParty(partyOne, partyTwo);
+                    exportParty(partyOne,partyTwo);
                     break;
                 case "L":
                     isValidInput = true;
@@ -40,7 +42,7 @@ public class Menu {
                     randomParties(partyOne,partyTwo);
                     break;
                 default:
-                    System.out.println("Input not accepted. Please choose between 1) (=C) and 2) (=L).");
+                    System.out.println("Input not accepted. Please choose between 1) (=C), 2) (=L) and 3) (=R).");
             }
         }
         System.out.println("The Game will be started!");
@@ -147,6 +149,32 @@ public class Menu {
         System.out.println("Party One has been successfully imported!");
         partyTwo.importParty("test2");
         System.out.println("Party Two has been successfully imported!");
+    }
+
+    public void exportParty(Party partyOne, Party partyTwo){
+        Scanner sc = new Scanner(System.in);
+        boolean isValidInput = false;
+
+        while (!isValidInput) {
+            System.out.print("Do you wish to export the created parties (J/N)?: ");
+            switch (sc.next().toUpperCase()) {
+                case "J":
+                    //System.out.println(partyOne.exportParty("test1")) ;
+                    //System.out.println(partyTwo.exportParty("test2"));
+                    partyOne.exportParty("test1");
+                    partyTwo.exportParty("test2");
+                    System.out.println("Party One has been successfully exported!");
+                    System.out.println("Party Two has been successfully exported!");
+                    isValidInput=true;
+                    break;
+                case "N":
+                    isValidInput=true;
+                    break;
+                default:
+                    System.out.println("Input not accepted. Please choose between 1) (=J) and 2) (=N).");
+            }
+        }
+
     }
 
     public void randomParties(Party partyOne, Party partyTwo){

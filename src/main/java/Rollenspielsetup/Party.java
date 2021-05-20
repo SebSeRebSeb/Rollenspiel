@@ -65,7 +65,7 @@ public class Party {
         }
     }
 
-    public String exportParty() {
+    public String exportParty(String inputfile) {
         //initialisiere ausgabe
         String ausgabe = "";
         for (int j = 0; j < this.party.size(); j++) {
