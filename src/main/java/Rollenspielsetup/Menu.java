@@ -29,17 +29,17 @@ public class Menu {
                     isValidInput = true;
                     System.out.println("Party will be created!");
                     createParty(partyOne, partyTwo);
-                    exportParty(partyOne,partyTwo);
+                    exportParty(partyOne, partyTwo);
                     break;
                 case "L":
                     isValidInput = true;
                     System.out.println("Party will be imported!");
-                    importParty(partyOne,partyTwo);
+                    importParty(partyOne, partyTwo);
                     break;
                 case "R":
                     isValidInput = true;
                     System.out.println("Random mode!");
-                    randomParties(partyOne,partyTwo);
+                    randomParties(partyOne, partyTwo);
                     break;
                 default:
                     System.out.println("Input not accepted. Please choose between 1) (=C), 2) (=L) and 3) (=R).");
@@ -137,14 +137,14 @@ public class Menu {
         }
     }
 
-    public void importParty(Party partyOne, Party partyTwo){
+    public void importParty(Party partyOne, Party partyTwo) {
         partyOne.importParty("partyOne.csv");
         System.out.println("Party One has been successfully imported!");
         partyTwo.importParty("partyTwo.csv");
         System.out.println("Party Two has been successfully imported!");
     }
 
-    public void exportParty(Party partyOne, Party partyTwo){
+    public void exportParty(Party partyOne, Party partyTwo) {
         Scanner sc = new Scanner(System.in);
         boolean isValidInput = false;
 
@@ -158,10 +158,10 @@ public class Menu {
                     partyTwo.exportParty("partyTwo.csv");
                     System.out.println("Party One has been successfully exported!");
                     System.out.println("Party Two has been successfully exported!");
-                    isValidInput=true;
+                    isValidInput = true;
                     break;
                 case "N":
-                    isValidInput=true;
+                    isValidInput = true;
                     break;
                 default:
                     System.out.println("Input not accepted. Please choose between 1) (=J) and 2) (=N).");
@@ -170,30 +170,30 @@ public class Menu {
 
     }
 
-    public void randomParties(Party partyOne, Party partyTwo){
+    public void randomParties(Party partyOne, Party partyTwo) {
         Random random = new Random();
         int iteration = random.nextInt(11);
         System.out.println("Parties of size " + iteration + " will be created!");
         Character newCharacter;
         int randomNumber;
-        for (int k=0; k<iteration;k++){
+        for (int k = 0; k < iteration; k++) {
             randomNumber = random.nextInt(2);
             if (randomNumber == 0) {
-                newCharacter= new Wizard();
+                newCharacter = new Wizard();
                 partyOne.add(newCharacter);
                 System.out.println("Wizard " + newCharacter.getName() + " was created!");
             } else {
-                newCharacter= new Warrior();
+                newCharacter = new Warrior();
                 partyOne.add(newCharacter);
                 System.out.println("Warrior " + newCharacter.getName() + " was created!");
             }
             randomNumber = random.nextInt(1);
             if (randomNumber == 0) {
-                newCharacter= new Wizard();
+                newCharacter = new Wizard();
                 partyTwo.add(newCharacter);
                 System.out.println("Wizard " + newCharacter.getName() + " was created!");
             } else {
-                newCharacter= new Warrior();
+                newCharacter = new Warrior();
                 partyTwo.add(newCharacter);
                 System.out.println("Warrior " + newCharacter.getName() + " was created!");
             }
@@ -233,7 +233,10 @@ public class Menu {
     public Character chooseCharacter(Party party) {
         Scanner sc = new Scanner(System.in);
         Integer inputNumber;
-        if(party.getParty().size()>1) {
+
+        boolean validInput = false;
+
+        if (party.getParty().size() > 1) {
             System.out.println("Choose your fighter:");
             for (int i = 0; i < party.getParty().size(); i++) {
                 System.out.println((i + 1) + ". Character " + party.getParty().get(i).getName() + " (Type: " + getType(party.getParty().get(i)) + ")");
@@ -247,10 +250,14 @@ public class Menu {
                             ((Wizard) party.getParty().get(i)).getIntelligence());
                 }
             }
-            System.out.print("Choose a fighter (Input: 1-" + party.getParty().size() + "):");
-            inputNumber = Integer.parseInt(sc.next());
-            System.out.println("You have chosen " + party.getParty().get(inputNumber - 1).getName() + "!");
-            return (party.getParty().get(inputNumber - 1));
+            while (!validInput) {
+                System.out.print("Choose a fighter (Input: 1-" + party.getParty().size() + "):");
+                inputNumber = Integer.parseInt(sc.next());
+                if(inputNumber > 0 && inputNumber <= party.getParty().size()){
+                System.out.println("You have chosen " + party.getParty().get(inputNumber - 1).getName() + "!");
+                validInput = true;
+                return (party.getParty().get(inputNumber - 1));}
+            }
         } else {
             System.out.println("Only one player left!");
             System.out.println(party.getParty().get(0).getName() + " (Type: " + getType(party.getParty().get(0)) + ")");
@@ -260,7 +267,9 @@ public class Menu {
             System.out.println(party.getParty().get(0).getName() + " will fight till the end!");
             return party.getParty().get(0);
         }
+        return null;
     }
+
 
     public void fight(Character character, Character character2, Graveyard graveyard, Party partyOne, Party partyTwo) {
         System.out.println(getType(character) + " " + character.getName() + " of Party 1 and " + getType(character2) + " " + character2.getName() + " of Party 2 are fighting!");
