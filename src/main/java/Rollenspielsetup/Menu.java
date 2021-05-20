@@ -1,6 +1,9 @@
 package Rollenspielsetup;
 
 
+import com.sun.jdi.Type;
+
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
@@ -9,14 +12,12 @@ public class Menu {
 
     // game interface
     public void startMenu(Party partyOne, Party partyTwo, Graveyard graveyard) {
-        Scanner sc = new Scanner(System.in);
-        boolean isValidInput = false;
+        String userInput=null;
+
         System.out.println("");
-        System.out.println("#############################################################");
-        System.out.println("###################DKB-RPG-SIMULATOR II######################");
-        System.out.println("#############################################################");
-        System.out.println("######################Start-Menu#############################");
-        System.out.println("#############################################################");
+        showTitle("DKB-RPG-SIMULATOR II");
+        System.out.println("");
+        showTitle("Start-Menu");
         System.out.println("");
         // check how parties should be created and filled with Characters (manually, from imported csv file or randomly)
         System.out.println("Press the specified key (C,L or R) to choose the parties");
@@ -25,122 +26,85 @@ public class Menu {
         System.out.println("2) Import parties (L)");
         System.out.println("3) Random fight (R)");
         // check User input for validity
-        while (!isValidInput) {
-            System.out.print("User-Input: ");
-            switch (sc.next().toUpperCase()) {
+        userInput=getValidatedUserInput(new String[]{"C","L","R"},"User-Input: ",
+                    "Input not accepted. Please choose between C,L and R.");
+        switch (userInput) {
                 case "C":
-                    isValidInput = true;
                     System.out.println("Party will be created!");
                     createParty(partyOne, partyTwo);
                     exportParty(partyOne, partyTwo);
                     break;
                 case "L":
-                    isValidInput = true;
                     System.out.println("Party will be imported!");
                     importParty(partyOne, partyTwo);
                     break;
                 case "R":
-                    isValidInput = true;
                     System.out.println("Random mode!");
                     randomParties(partyOne, partyTwo);
                     break;
-                default:
-                    System.out.println("Input not accepted. Please choose between 1) (=C), 2) (=L) and 3) (=R).");
-            }
         }
         // let the game begin!!
         System.out.println("");
-        System.out.println("####################The game starts!#########################");
+        showTitle("!!The game starts!!");
         System.out.println("");
         // choose characters
         while (!partyOne.getParty().isEmpty() && !partyTwo.getParty().isEmpty()) {
-            System.out.println("#############################################################");
-            System.out.println("######################Party One##############################");
-            System.out.println("#############################################################");
+            System.out.println("");
+            showTitle("Party One");
             System.out.println("");
             Character char1 = chooseCharacter(partyOne);
             System.out.println("");
-            System.out.println("#############################################################");
-            System.out.println("######################Party Two##############################");
-            System.out.println("#############################################################");
+            showTitle("Party Two");
             System.out.println("");
             Character char2 = chooseCharacter(partyTwo);
             System.out.println("");
-            System.out.println("#############################################################");
-            System.out.println("###################The fight starts!#########################");
-            System.out.println("#############################################################");
+            showTitle("!!The fight starts!!");
             System.out.println("");
             // let characters fight
             fight(char1, char2, graveyard, partyOne, partyTwo);
         }
         System.out.println("");
-        System.out.println("#############################################################");
-        System.out.println("###################The Game is over!#########################");
-        System.out.println("#############################################################");
+        showTitle("The game is over!");
         System.out.println("");
         // show result of battle
         if (partyTwo.getParty().isEmpty() && partyOne.getParty().isEmpty()) {
-            System.out.println("#############################################################");
-            System.out.println("###################It's a TIE !##############################");
-            System.out.println("#############################################################");
+            showTitle("It's a TIE !");
         } else if (partyTwo.getParty().isEmpty()) {
-            System.out.println("#############################################################");
-            System.out.println("###################Party 1 won!##############################");
-            System.out.println("#############################################################");
+            showTitle("Party 1 won!");
         } else if (partyOne.getParty().isEmpty()) {
-            System.out.println("#############################################################");
-            System.out.println("###################Party 2 won!##############################");
-            System.out.println("#############################################################");
+            showTitle("Party 2 won!");
         }
 
     }
 
     // set size of parties and fill with characters (via User input)
     public void createParty(Party partyOne, Party partyTwo) {
-        Scanner sc = new Scanner(System.in);
         Integer groupSize;
-        String userInput = "";
-        boolean isValidInput = false;
+        String userInput = null;
 
         System.out.println("");
-        System.out.println("#############################################################");
-        System.out.println("##################Create new parties#########################");
-        System.out.println("#############################################################");
+        showTitle("Create new parties");
         System.out.println("");
         System.out.println("Choose the size of the parties (1-10)");
-        while (!isValidInput) {
-            System.out.print("User-Input: ");
-            userInput = sc.next();
-            if (isNumeric(userInput)) {
-                groupSize = Integer.parseInt(userInput);
-                if ((groupSize <= 10) && (groupSize > 0)) {
-                    isValidInput = true;
-                    System.out.println("");
-                    System.out.println("#############################################################");
-                    System.out.println("######################Party One##############################");
-                    System.out.println("#############################################################");
-                    System.out.println("");
-                    for (int i = 0; i < groupSize; i++) {
-                        System.out.println("##################Create " + (i + 1) + ". Character##############");
-                        addCharactertoParty(partyOne);
-                    }
-                    System.out.println("");
-                    System.out.println("#############################################################");
-                    System.out.println("######################Party Two##############################");
-                    System.out.println("#############################################################");
-                    System.out.println("");
-                    for (int i = 0; i < groupSize; i++) {
-                        System.out.println("##################Create " + (i + 1) + ". Character##############");
-                        addCharactertoParty(partyTwo);
-                    }
-                } else {
-                    System.out.println("Input not accepted. Only values between 1 and 10 are accepted.");
-                }
-            } else {
-                System.out.println("Input not accepted. Only NUMERIC values between 1 and 10 are accepted.");
+        String[] validInput = new String[]{"1","2","3","4","5","6","7","8","9","10"};
+        userInput=getValidatedUserInput(validInput,"User-Input: ",
+                "Input not accepted. Only NUMERIC values between 1 and 10 are accepted.");
+        groupSize = Integer.parseInt(userInput);
+            System.out.println("");
+            showTitle("Party One");
+            System.out.println("");
+            for (int i = 0; i < groupSize; i++) {
+                System.out.println("##################Create " + (i + 1) + ". Character##############");
+                addCharactertoParty(partyOne);
+            }
+            System.out.println("");
+            showTitle("Party Two");
+            System.out.println("");
+            for (int i = 0; i < groupSize; i++) {
+                System.out.println("##################Create " + (i + 1) + ". Character##############");
+                addCharactertoParty(partyTwo);
             }
         }
-    }
 
     // import party from csv-file
     public void importParty(Party partyOne, Party partyTwo) {
@@ -248,15 +212,7 @@ public class Menu {
             System.out.println("Choose your fighter:");
             for (int i = 0; i < party.getParty().size(); i++) {
                 System.out.println((i + 1) + ". Character " + party.getParty().get(i).getName() + " (Type: " + getType(party.getParty().get(i)) + ")");
-                if (party.getParty().get(i) instanceof Warrior) {
-                    System.out.println("HP:" + party.getParty().get(i).getHp() + "|Stamina:" +
-                            ((Warrior) party.getParty().get(i)).getStamina() + "|Strength:" +
-                            ((Warrior) party.getParty().get(i)).getStrength());
-                } else {
-                    System.out.println("HP:" + party.getParty().get(i).getHp() + "|Mana:" +
-                            ((Wizard) party.getParty().get(i)).getMana() + "|Intelligence:" +
-                            ((Wizard) party.getParty().get(i)).getIntelligence());
-                }
+                showStats(party.getParty().get(i));
             }
             // incl. check input for validity
             while (!validInput) {
@@ -278,9 +234,7 @@ public class Menu {
             // if only one Character, Character is automatically chosen
             System.out.println("Only one player left!");
             System.out.println(party.getParty().get(0).getName() + " (Type: " + getType(party.getParty().get(0)) + ")");
-            System.out.println("HP:" + party.getParty().get(0).getHp() + "|Mana:" +
-                    ((Wizard) party.getParty().get(0)).getMana() + "|Intelligence:" +
-                    ((Wizard) party.getParty().get(0)).getIntelligence());
+            showStats(party.getParty().get(0));
             System.out.println(party.getParty().get(0).getName() + " will fight till the end!");
             return party.getParty().get(0);
         }
@@ -334,4 +288,51 @@ public class Menu {
         }
         return true;
     }
+
+    public void showTitle(String title){
+        //show title in cool format
+        final int TITLEWIDTH=61; //default length of 61
+        int titleLength= title.length();
+        String middlePart= new String();
+
+        int repeat1= (int) (TITLEWIDTH-titleLength)/2;
+        int repeat2= (TITLEWIDTH-titleLength)-repeat1;
+        System.out.println("#############################################################");
+        System.out.println("#".repeat(repeat1) + title + "#".repeat(repeat2));
+        System.out.println("#############################################################");
+    }
+
+    public void showStats(Character character){
+        if (character instanceof Warrior) {
+            System.out.println("HP:" + character.getHp() + "|Stamina:" +
+                    ((Warrior) character).getStamina() + "|Strength:" +
+                    ((Warrior) character).getStrength());
+        } else {
+            System.out.println("HP:" + character.getHp() + "|Mana:" +
+                    ((Wizard) character).getMana() + "|Intelligence:" +
+                    ((Wizard) character).getIntelligence());
+        }
+    }
+
+    public String getValidatedUserInput(String[] validInput, String inputField, String outputInvalid){
+        // check User input for validity
+        Scanner sc = new Scanner(System.in);
+        String userInput = null;
+        boolean validationCheck= false;
+
+        while (!validationCheck) {
+            System.out.print(inputField);
+            userInput=sc.next().toUpperCase();
+            for(int h=0;h<validInput.length;h++){
+                if(validInput[h].toUpperCase().contains(userInput)) {
+                    validationCheck=true;
+                    break;
+                }
+            }
+            if(!validationCheck){System.out.println(outputInvalid);};
+        }
+
+        return userInput;
+    }
+
 }
