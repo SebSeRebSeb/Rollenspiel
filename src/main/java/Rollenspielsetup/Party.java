@@ -30,7 +30,7 @@ public class Party {
     public void add(Character character) {
         for (int i = 0; i < party.size(); i++) {
             if (party.get(i).getName().equals(character.getName())) {
-                character.setName(character.getName() + " jr");
+                character.setName(character.getName() + "_Jr");
                 this.party.add(character);
                 return;
             }
