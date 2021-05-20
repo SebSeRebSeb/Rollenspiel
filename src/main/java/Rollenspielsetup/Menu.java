@@ -8,7 +8,7 @@ public class Menu {
     public void startMenu(Party partyOne, Party partyTwo, Graveyard graveyard) {
         Scanner sc = new Scanner(System.in);
         boolean isValidInput = false;
-
+        System.out.println("");
         System.out.println("#############################################################");
         System.out.println("###################DKB-RPG-SIMULATOR II######################");
         System.out.println("#############################################################");
@@ -35,9 +35,11 @@ public class Menu {
                     System.out.println("Input not accepted. Please choose between 1) (=C) and 2) (=L).");
             }
         }
-        System.out.println("The Game will be started!");
+        System.out.println("");
+        System.out.println("####################The game starts!#########################");
+        System.out.println("");
 
-        while (!partyOne.getParty().isEmpty() && !partyTwo.getParty().isEmpty()) {  //while loop bedingung stimmt nicht ganz
+        while (!partyOne.getParty().isEmpty() && !partyTwo.getParty().isEmpty()) {
             System.out.println("#############################################################");
             System.out.println("######################Party One##############################");
             System.out.println("#############################################################");
@@ -57,25 +59,14 @@ public class Menu {
             System.out.println("#############################################################");
             System.out.println("");
 
-            System.out.println(getType(char1) + " " + char1.getName() + " of Party 1 and " + getType(char1) + " " + char2.getName() + " of Party 2 are fighting!");
-            System.out.println("");
-
-            fight(char1, char2);
-
-            if (!char1.isAlive) {
-                partyOne.remove(char1);
-                graveyard.died(char1);
-            }
-            if (!char2.isAlive) {
-                partyTwo.remove(char2);
-                graveyard.died(char2);
-            }
-            System.out.println(graveyard.seeCasualties());
+            fight(char1, char2, graveyard, partyOne, partyTwo);
         }
+        System.out.println("");
         System.out.println("#############################################################");
         System.out.println("###################The Game is over!#########################");
         System.out.println("#############################################################");
         System.out.println("");
+
         if (partyTwo.getParty().isEmpty() && partyOne.getParty().isEmpty()) {
             System.out.println("#############################################################");
             System.out.println("###################It's a TIE !##############################");
@@ -98,7 +89,7 @@ public class Menu {
         String userInput = "";
         boolean isValidInput = false;
 
-
+        System.out.println("");
         System.out.println("#############################################################");
         System.out.println("##################Create new parties#########################");
         System.out.println("#############################################################");
@@ -111,6 +102,7 @@ public class Menu {
                 groupSize = Integer.parseInt(userInput);
                 if ((groupSize <= 10) && (groupSize > 0)) {
                     isValidInput = true;
+                    System.out.println("");
                     System.out.println("#############################################################");
                     System.out.println("######################Party One##############################");
                     System.out.println("#############################################################");
@@ -119,6 +111,7 @@ public class Menu {
                         System.out.println("##################Create " + (i + 1) + ". Character##############");
                         addCharactertoParty(partyOne);
                     }
+                    System.out.println("");
                     System.out.println("#############################################################");
                     System.out.println("######################Party Two##############################");
                     System.out.println("#############################################################");
@@ -181,16 +174,29 @@ public class Menu {
                         ((Wizard) party.getParty().get(i)).getIntelligence());
             }
         }
+        System.out.println("");
         System.out.print("Choose a fighter (Input: 1-" + party.getParty().size() + "):");
         inputNumber = Integer.parseInt(sc.next());
         return (party.getParty().get(inputNumber - 1));
     }
 
-    public void fight(Character character, Character character2) {
+    public void fight(Character character, Character character2, Graveyard graveyard, Party partyOne, Party partyTwo) {
+        System.out.println(getType(character) + " " + character.getName() + " of Party 1 and " + getType(character2) + " " + character2.getName() + " of Party 2 are fighting!");
+        System.out.println("");
         while (character.isAlive && character2.isAlive) {
             character.attack(character2);
             character2.attack(character);
         }
+        if (!character.isAlive) {
+            partyOne.remove(character);
+            graveyard.died(character);
+        }
+        if (!character2.isAlive) {
+            partyTwo.remove(character2);
+            graveyard.died(character2);
+        }
+        System.out.println("");
+        System.out.println(graveyard.seeCasualties());
     }
 
 
