@@ -3,6 +3,8 @@ package Rollenspielsetup;
 
 import java.util.Scanner;
 
+import static Rollenspielsetup.Names.resetNameList;
+
 public class Menu {
 
     public void startMenu(Party partyOne, Party partyTwo, Graveyard graveyard) {
@@ -119,6 +121,7 @@ public class Menu {
                         System.out.println("##################Create " + (i + 1) + ". Character##############");
                         addCharactertoParty(partyOne);
                     }
+                    resetNameList();
                     System.out.println("#############################################################");
                     System.out.println("######################Party Two##############################");
                     System.out.println("#############################################################");
@@ -127,6 +130,7 @@ public class Menu {
                         System.out.println("##################Create " + (i + 1) + ". Character##############");
                         addCharactertoParty(partyTwo);
                     }
+                    resetNameList();
                 } else {
                     System.out.println("Input not accepted. Only values between 1 and 10 are accepted.");
                 }
@@ -163,7 +167,7 @@ public class Menu {
                     System.out.println("Input not accepted. Choose between Wizard(1) and Warrior(2)");
             }
         }
-    }
+      }
 
     public Character chooseCharacter(Party party) {
         Scanner sc = new Scanner(System.in);

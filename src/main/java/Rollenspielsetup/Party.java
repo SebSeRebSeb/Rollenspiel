@@ -1,6 +1,13 @@
 package Rollenspielsetup;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
 
 public class Party {
     private ArrayList<Character> party = new ArrayList<>();
@@ -24,9 +31,43 @@ public class Party {
     public void add(Character character) {
         for (int i = 0; i < party.size(); i++) {
             if (party.get(i).getName().equals(character.getName())) {
-                character.setName(character.getName() + " jr");
+                character.setName(character.getName() + "jr");
+
+//                if ((party.get(i).getName()).equals(character.getName())){
+//                    character.setName(character.getName() + "jrJR");
+//                }
+                String fileName = "rollenspiel_namen.csv";
+                File file = new File(fileName);
+                List<String> result = new ArrayList<>();
+
+                try {
+
+                    Scanner inputStream = new Scanner(file);
+                    while (inputStream.hasNext()) {
+                        String[] data = inputStream.next().split(" ");
+                        Collections.addAll(result, data);
+                    }
+                    inputStream.close();
+
+                } catch (FileNotFoundException e) {
+
+                    e.printStackTrace();
+                }
+                result.add(character.getName());
+
+
+                try {
+                    FileWriter writer = new FileWriter("rollenspiel_namen.csv");
+                    for (String name : result) {
+                        writer.write(name + "\n");
+                    }
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 this.party.add(character);
                 return;
+
             }
 
 
@@ -46,22 +87,22 @@ public class Party {
     public void importParty(String inputString) {
         String[] parts = inputString.split("\n");
         String[] zeile;
-        for(int i=0;i<parts.length;i++){
-           zeile=parts[i].split(";");
-           switch(zeile[5]){
-               case "Warrior":
-                   Warrior warrior = new Warrior(zeile[1],Integer.parseInt(zeile[2]),Integer.parseInt(zeile[3]),Integer.parseInt(zeile[4]));
-                   warrior.setId(zeile[0]);
-                   this.party.add(warrior);
-                   break;
-               case "Wizard":
-                   Wizard wizard = new Wizard(zeile[1],Integer.parseInt(zeile[2]),Integer.parseInt(zeile[3]),Integer.parseInt(zeile[4]));
-                   wizard.setId(zeile[0]);
-                   this.party.add(wizard);
-                   break;
-               default:
-                   System.err.println("Character type doesn't exist!");
-           }
+        for (int i = 0; i < parts.length; i++) {
+            zeile = parts[i].split(";");
+            switch (zeile[5]) {
+                case "Warrior":
+                    Warrior warrior = new Warrior(zeile[1], Integer.parseInt(zeile[2]), Integer.parseInt(zeile[3]), Integer.parseInt(zeile[4]));
+                    warrior.setId(zeile[0]);
+                    this.party.add(warrior);
+                    break;
+                case "Wizard":
+                    Wizard wizard = new Wizard(zeile[1], Integer.parseInt(zeile[2]), Integer.parseInt(zeile[3]), Integer.parseInt(zeile[4]));
+                    wizard.setId(zeile[0]);
+                    this.party.add(wizard);
+                    break;
+                default:
+                    System.err.println("Character type doesn't exist!");
+            }
         }
     }
 
