@@ -10,10 +10,16 @@ public abstract class Character {
     protected int hp;
     protected boolean isAlive;
 
-    // constructor
-
     public Character() {
+
         setName(Names.getRandomName());
+        this.isAlive = true;
+    }
+
+    public Character(String name, int hp) {
+
+        setName(name);
+        setHp(hp);
         this.isAlive = true;
     }
 
