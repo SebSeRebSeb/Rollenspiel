@@ -1,6 +1,7 @@
 package Rollenspielsetup;
 
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Menu {
@@ -15,10 +16,11 @@ public class Menu {
         System.out.println("######################Start-Menu#############################");
         System.out.println("#############################################################");
         System.out.println("");
-        System.out.println("Press the specified key (C or L) to choose the parties");
+        System.out.println("Press the specified key (C,L or R) to choose the parties");
         System.out.println("");
         System.out.println("1) Create new parties (C)");
         System.out.println("2) Import parties (L)");
+        System.out.println("3) Random fight (R)");
         while (!isValidInput) {
             System.out.print("User-Input: ");
             switch (sc.next()) {
@@ -30,6 +32,12 @@ public class Menu {
                 case "L":
                     isValidInput = true;
                     System.out.println("Party will be imported!");
+                    importParty(partyOne,partyTwo);
+                    break;
+                case "R":
+                    isValidInput = true;
+                    System.out.println("Random mode!");
+                    randomParties(partyOne,partyTwo);
                     break;
                 default:
                     System.out.println("Input not accepted. Please choose between 1) (=C) and 2) (=L).");
@@ -43,14 +51,12 @@ public class Menu {
             System.out.println("#############################################################");
             System.out.println("");
             Character char1 = chooseCharacter(partyOne);
-            System.out.println("You have chosen " + char1.getName() + "!");
             System.out.println("");
             System.out.println("#############################################################");
             System.out.println("######################Party Two##############################");
             System.out.println("#############################################################");
             System.out.println("");
             Character char2 = chooseCharacter(partyTwo);
-            System.out.println("You have chosen " + char2.getName() + "!");
             System.out.println("");
             System.out.println("#############################################################");
             System.out.println("###################The fight starts!#########################");
@@ -136,6 +142,44 @@ public class Menu {
         }
     }
 
+    public void importParty(Party partyOne, Party partyTwo){
+        partyOne.importParty("test");
+        System.out.println("Party One has been successfully imported!");
+        partyTwo.importParty("test2");
+        System.out.println("Party Two has been successfully imported!");
+    }
+
+    public void randomParties(Party partyOne, Party partyTwo){
+        Random random = new Random();
+        int iteration = random.nextInt(11);
+        System.out.println("Parties of size " + iteration + " will be created!");
+        Character newCharacter;
+        int randomNumber;
+        for (int k=0; k<iteration;k++){
+            randomNumber = random.nextInt(2);
+            if (randomNumber == 0) {
+                newCharacter= new Wizard();
+                partyOne.add(newCharacter);
+                System.out.println("Wizard " + newCharacter.getName() + " was created!");
+            } else {
+                newCharacter= new Warrior();
+                partyOne.add(newCharacter);
+                System.out.println("Warrior " + newCharacter.getName() + " was created!");
+            }
+            randomNumber = random.nextInt(1);
+            if (randomNumber == 0) {
+                newCharacter= new Wizard();
+                partyTwo.add(newCharacter);
+                System.out.println("Wizard " + newCharacter.getName() + " was created!");
+            } else {
+                newCharacter= new Warrior();
+                partyTwo.add(newCharacter);
+                System.out.println("Warrior " + newCharacter.getName() + " was created!");
+            }
+        }
+
+    }
+
     public void addCharactertoParty(Party party) {
         Scanner sc = new Scanner(System.in);
         String inputType;
@@ -168,22 +212,33 @@ public class Menu {
     public Character chooseCharacter(Party party) {
         Scanner sc = new Scanner(System.in);
         Integer inputNumber;
-        System.out.println("Choose your fighter:");
-        for (int i = 0; i < party.getParty().size(); i++) {
-            System.out.println((i + 1) + ". Character " + party.getParty().get(i).getName() + " (Type: " + getType(party.getParty().get(i)) + ")");
-            if (party.getParty().get(i) instanceof Warrior) {
-                System.out.println("HP:" + party.getParty().get(i).getHp() + "|Stamina:" +
-                        ((Warrior) party.getParty().get(i)).getStamina() + "|Strength:" +
-                        ((Warrior) party.getParty().get(i)).getStrength());
-            } else {
-                System.out.println("HP:" + party.getParty().get(i).getHp() + "|Mana:" +
-                        ((Wizard) party.getParty().get(i)).getMana() + "|Intelligence:" +
-                        ((Wizard) party.getParty().get(i)).getIntelligence());
+        if(party.getParty().size()>1) {
+            System.out.println("Choose your fighter:");
+            for (int i = 0; i < party.getParty().size(); i++) {
+                System.out.println((i + 1) + ". Character " + party.getParty().get(i).getName() + " (Type: " + getType(party.getParty().get(i)) + ")");
+                if (party.getParty().get(i) instanceof Warrior) {
+                    System.out.println("HP:" + party.getParty().get(i).getHp() + "|Stamina:" +
+                            ((Warrior) party.getParty().get(i)).getStamina() + "|Strength:" +
+                            ((Warrior) party.getParty().get(i)).getStrength());
+                } else {
+                    System.out.println("HP:" + party.getParty().get(i).getHp() + "|Mana:" +
+                            ((Wizard) party.getParty().get(i)).getMana() + "|Intelligence:" +
+                            ((Wizard) party.getParty().get(i)).getIntelligence());
+                }
             }
+            System.out.print("Choose a fighter (Input: 1-" + party.getParty().size() + "):");
+            inputNumber = Integer.parseInt(sc.next());
+            System.out.println("You have chosen " + party.getParty().get(inputNumber - 1).getName() + "!");
+            return (party.getParty().get(inputNumber - 1));
+        } else {
+            System.out.println("Only one player left!");
+            System.out.println(party.getParty().get(0).getName() + " (Type: " + getType(party.getParty().get(0)) + ")");
+            System.out.println("HP:" + party.getParty().get(0).getHp() + "|Mana:" +
+                    ((Wizard) party.getParty().get(0)).getMana() + "|Intelligence:" +
+                    ((Wizard) party.getParty().get(0)).getIntelligence());
+            System.out.println(party.getParty().get(0).getName() + " will fight till the end!");
+            return party.getParty().get(0);
         }
-        System.out.print("Choose a fighter (Input: 1-" + party.getParty().size() + "):");
-        inputNumber = Integer.parseInt(sc.next());
-        return (party.getParty().get(inputNumber - 1));
     }
 
     public void fight(Character character, Character character2) {
