@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Menu {
 
+    // game interface
     public void startMenu(Party partyOne, Party partyTwo, Graveyard graveyard) {
         Scanner sc = new Scanner(System.in);
         boolean isValidInput = false;
@@ -17,11 +18,13 @@ public class Menu {
         System.out.println("######################Start-Menu#############################");
         System.out.println("#############################################################");
         System.out.println("");
+        // check how parties should be created and filled with Characters (manually, from imported csv file or randomly)
         System.out.println("Press the specified key (C,L or R) to choose the parties");
         System.out.println("");
         System.out.println("1) Create new parties (C)");
         System.out.println("2) Import parties (L)");
         System.out.println("3) Random fight (R)");
+        // check User input for validity
         while (!isValidInput) {
             System.out.print("User-Input: ");
             switch (sc.next().toUpperCase()) {
@@ -45,10 +48,11 @@ public class Menu {
                     System.out.println("Input not accepted. Please choose between 1) (=C), 2) (=L) and 3) (=R).");
             }
         }
+        // let the game begin!!
         System.out.println("");
         System.out.println("####################The game starts!#########################");
         System.out.println("");
-
+        // choose characters
         while (!partyOne.getParty().isEmpty() && !partyTwo.getParty().isEmpty()) {
             System.out.println("#############################################################");
             System.out.println("######################Party One##############################");
@@ -66,7 +70,7 @@ public class Menu {
             System.out.println("###################The fight starts!#########################");
             System.out.println("#############################################################");
             System.out.println("");
-
+        // let characters fight
             fight(char1, char2, graveyard, partyOne, partyTwo);
         }
         System.out.println("");
@@ -74,7 +78,7 @@ public class Menu {
         System.out.println("###################The Game is over!#########################");
         System.out.println("#############################################################");
         System.out.println("");
-
+        // show result of battle
         if (partyTwo.getParty().isEmpty() && partyOne.getParty().isEmpty()) {
             System.out.println("#############################################################");
             System.out.println("###################It's a TIE !##############################");
@@ -91,6 +95,7 @@ public class Menu {
 
     }
 
+    // set size of parties and fill with characters (via User input)
     public void createParty(Party partyOne, Party partyTwo) {
         Scanner sc = new Scanner(System.in);
         Integer groupSize;
@@ -137,13 +142,14 @@ public class Menu {
         }
     }
 
+    // import party from csv-file
     public void importParty(Party partyOne, Party partyTwo) {
         partyOne.importParty("partyOne.csv");
         System.out.println("Party One has been successfully imported!");
         partyTwo.importParty("partyTwo.csv");
         System.out.println("Party Two has been successfully imported!");
     }
-
+    // export party to csv-file
     public void exportParty(Party partyOne, Party partyTwo) {
         Scanner sc = new Scanner(System.in);
         boolean isValidInput = false;
@@ -152,8 +158,6 @@ public class Menu {
             System.out.print("Do you wish to export the created parties (J/N)?: ");
             switch (sc.next().toUpperCase()) {
                 case "J":
-                    //System.out.println(partyOne.exportParty("test1")) ;
-                    //System.out.println(partyTwo.exportParty("test2"));
                     partyOne.exportParty("partyOne.csv");
                     partyTwo.exportParty("partyTwo.csv");
                     System.out.println("Party One has been successfully exported!");
@@ -170,6 +174,7 @@ public class Menu {
 
     }
 
+    // generate a party of certain size (user input) and fill in with random Characters (Wizards, Warriors)
     public void randomParties(Party partyOne, Party partyTwo) {
         Random random = new Random();
         int iteration = random.nextInt(11);
@@ -200,7 +205,7 @@ public class Menu {
         }
 
     }
-
+// add a Character to a certain party, User Input to decide whether Wizard (1) or Warrior (2) is created
     public void addCharactertoParty(Party party) {
         Scanner sc = new Scanner(System.in);
         String inputType;
@@ -230,6 +235,7 @@ public class Menu {
         }
     }
 
+    // choose character via user input to let the fight against each other
     public Character chooseCharacter(Party party) {
         Scanner sc = new Scanner(System.in);
         Integer inputNumber;
@@ -250,6 +256,7 @@ public class Menu {
                             ((Wizard) party.getParty().get(i)).getIntelligence());
                 }
             }
+            // incl. check input for validity
             while (!validInput) {
                 System.out.print("Choose a fighter (Input: 1-" + party.getParty().size() + "):");
                 inputNumber = Integer.parseInt(sc.next());
@@ -259,6 +266,7 @@ public class Menu {
                 return (party.getParty().get(inputNumber - 1));}
             }
         } else {
+            // if only one Character, Character is automatically chosen
             System.out.println("Only one player left!");
             System.out.println(party.getParty().get(0).getName() + " (Type: " + getType(party.getParty().get(0)) + ")");
             System.out.println("HP:" + party.getParty().get(0).getHp() + "|Mana:" +
@@ -270,7 +278,7 @@ public class Menu {
         return null;
     }
 
-
+    // two characters fighting until one dead (loop); dead character are killed and sent to graveyard; graveyard is shown
     public void fight(Character character, Character character2, Graveyard graveyard, Party partyOne, Party partyTwo) {
         System.out.println(getType(character) + " " + character.getName() + " of Party 1 and " + getType(character2) + " " + character2.getName() + " of Party 2 are fighting!");
         System.out.println("");
@@ -296,7 +304,7 @@ public class Menu {
         System.out.println(graveyard.seeCasualties());
     }
 
-
+    // return if a character is of type wizard or warrior
     public String getType(Character character) {
         if (character instanceof Wizard) {
             return "Wizard";
@@ -305,7 +313,7 @@ public class Menu {
         }
     }
 
-
+    // check if given value is a number
     public static boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;

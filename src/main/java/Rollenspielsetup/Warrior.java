@@ -6,8 +6,9 @@ public class Warrior extends Character implements Attacker{
     private int stamina;
     private int strength;
 
+    // constructers
+
     public Warrior(){
-//        super(name);
         setStrength();
         setStamina();
         setHp();
@@ -18,10 +19,9 @@ public class Warrior extends Character implements Attacker{
         setStamina(stamina);
         setStrength(strength);
         setHp(hp);
-        //Setter mit Propertyprüfung ergänzen
     }
 
-    // Attack method
+    // Attack method 1 Character against 1 Character
     @Override
     public void attack(Character character) {
         int damage;
@@ -81,13 +81,15 @@ public class Warrior extends Character implements Attacker{
         }
     }
 
-
+    // Override of setters of parent class Character - Warrior randomly generated
     @Override
     public void setHp(){
         Random random = new Random();
         int hp = 100+random.nextInt(101);
         this.hp = hp;
     }
+
+    // Override of setters of parent class Character - Warrior generated when hp is given (import)
     @Override
     public void setHp(int hp){
         if (hp >=100 && hp <201){

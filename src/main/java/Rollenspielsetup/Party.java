@@ -11,6 +11,8 @@ import java.util.Scanner;
 public class Party {
     private ArrayList<Character> party = new ArrayList<>();
 
+    // constructor
+
     public Party() {
 
     }
@@ -19,6 +21,8 @@ public class Party {
         this.party = party;
     }
 
+    // setter + getter
+
     public ArrayList<Character> getParty() {
         return party;
     }
@@ -26,6 +30,8 @@ public class Party {
     public void setParty(ArrayList<Character> party) {
         this.party = party;
     }
+
+    // add a Character to party
 
     public void add(Character character) {
         for (int i = 0; i < party.size(); i++) {
@@ -40,6 +46,7 @@ public class Party {
         this.party.add(character);
     }
 
+    // remove Character from party
 
     public void remove(Character character) {
         if (this.party.contains(character)) {
@@ -48,6 +55,8 @@ public class Party {
             System.out.println("Character doesn't exist!");
         }
     }
+
+    // import Party from csv file
 
     public void importParty(String input) {
 
@@ -90,9 +99,10 @@ public class Party {
 
         }
 
+    // export to csv file
 
     public void exportParty(String inputFile) {
-        //initialisiere ausgabe
+        //initialize export
         String ausgabe = "";
         for (int j = 0; j < this.party.size(); j++) {
             if (this.party.get(j) instanceof Warrior) {
@@ -106,7 +116,7 @@ public class Party {
                         ((Wizard) this.party.get(j)).getIntelligence() + ";Wizard\n";
             }
         }
-        // Party wird in eine Datei geschrieben
+        // party is written to csv file
         try{
 
             FileWriter fw=new FileWriter(inputFile);
@@ -117,12 +127,15 @@ public class Party {
 
     }
 
+    // overriding system methods for better usage
+
     @Override
     public String toString() {
         return "Party{" +
                 "party=" + party +
                 '}';
     }
+
 
     @Override
     public boolean equals(Object o) {
