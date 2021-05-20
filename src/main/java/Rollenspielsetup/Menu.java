@@ -275,8 +275,14 @@ public class Menu {
         System.out.println(getType(character) + " " + character.getName() + " of Party 1 and " + getType(character2) + " " + character2.getName() + " of Party 2 are fighting!");
         System.out.println("");
         while (character.isAlive && character2.isAlive) {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             character.attack(character2);
             character2.attack(character);
+            System.out.println("");
         }
         if (!character.isAlive) {
             partyOne.remove(character);
