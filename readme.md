@@ -57,7 +57,7 @@
 
 ###  3. Das Kampfsystem
 
-#### 3.1 Character für den Kampf auswählen
+#### 3.1 Character für den Kampf auswählen 
 #### Ein Kampf findet rundenbasiert statt. In jeder Runde muss pro Party einen Character für den nächsten Kampf gewählt werden. Hierfür muss die Zahl des Characters eingegeben werden.
         Beispiel:
         Choose your fighter:
