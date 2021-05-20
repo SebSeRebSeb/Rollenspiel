@@ -1,5 +1,6 @@
 package Rollenspielsetup;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public abstract class Character {
@@ -59,6 +60,19 @@ public abstract class Character {
 
     public int getHp() {
         return hp;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Character character = (Character) o;
+        return hp == character.hp && isAlive == character.isAlive && Objects.equals(id, character.id) && Objects.equals(name, character.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, hp, isAlive);
     }
 
     public abstract void attack(Character character);

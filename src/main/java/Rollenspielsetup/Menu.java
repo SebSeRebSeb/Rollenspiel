@@ -30,6 +30,9 @@ public class Menu {
                 case "L":
                     isValidInput = true;
                     System.out.println("Party will be imported!");
+                    partyOne.importParty("partyOne.csv");
+                    partyOne.importParty("partyTwo.csv");
+
                     break;
                 default:
                     System.out.println("Input not accepted. Please choose between 1) (=C) and 2) (=L).");
@@ -119,6 +122,7 @@ public class Menu {
                         System.out.println("##################Create " + (i + 1) + ". Character##############");
                         addCharactertoParty(partyOne);
                     }
+                    partyOne.exportParty("partyOne.csv");
                     System.out.println("#############################################################");
                     System.out.println("######################Party Two##############################");
                     System.out.println("#############################################################");
@@ -127,6 +131,7 @@ public class Menu {
                         System.out.println("##################Create " + (i + 1) + ". Character##############");
                         addCharactertoParty(partyTwo);
                     }
+                    partyOne.exportParty("partyTwo.csv");
                 } else {
                     System.out.println("Input not accepted. Only values between 1 and 10 are accepted.");
                 }
@@ -192,6 +197,8 @@ public class Menu {
             character2.attack(character);
         }
     }
+
+
 
 
     public String getType(Character character) {
