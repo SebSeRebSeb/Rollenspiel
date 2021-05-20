@@ -61,7 +61,7 @@ public class Party {
             while (inputStream.hasNext()) {
                 //read single line, put in string
                 String[] zeile = inputStream.next().split(";");
-                if(zeile.length>1){
+                if (zeile.length > 1) {
 
 
                     switch (zeile[5]) {
@@ -85,10 +85,10 @@ public class Party {
             inputStream.close();
         } catch (FileNotFoundException e) {
 
-                e.printStackTrace();
-            }
-
+            e.printStackTrace();
         }
+
+    }
 
 
     public void exportParty(String inputFile) {
@@ -107,13 +107,14 @@ public class Party {
             }
         }
         // Party wird in eine Datei geschrieben
-        try{
+        try {
 
-            FileWriter fw=new FileWriter(inputFile);
+            FileWriter fw = new FileWriter(inputFile);
             fw.write(ausgabe);
             fw.close();
-            }
-        catch(IOException e){System.out.println(e);}
+        } catch (IOException e) {
+            System.out.println(e);
+        }
 
     }
 
