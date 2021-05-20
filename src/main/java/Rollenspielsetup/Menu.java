@@ -101,23 +101,23 @@ public class Menu {
     public void addCharactertoParty(Party party){
         Scanner sc = new Scanner(System.in);
         String inputType;
-        String name;
+//       String name;
 
         //Input for type of character
         System.out.print("Typ of character (1=Wizard;2=Warrior): ");
         inputType=sc.next();
-        System.out.print("Name of character: ");
-        name=sc.next();
+//        System.out.print("Name of character: ");
+//        name=sc.next();
         switch(inputType){
             case "1":
-                Wizard wizard= new Wizard(name);
+                Wizard wizard= new Wizard();
                 party.add(wizard);
-                System.out.println("Wizard "+ name + " was created!");
+                System.out.println("Wizard "+ wizard.getName() + " was created!");
                 break;
             case "2":
-                Warrior warrior= new Warrior(name);
+                Warrior warrior= new Warrior();
                 party.add(warrior);
-                System.out.println("Warrior "+ name + " was created!");
+                System.out.println("Warrior "+ warrior.getName() + " was created!");
                 break;
             default:
                 System.out.println("Input not accepted. Choose between Wizard(1) and Warrior(2)");
