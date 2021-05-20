@@ -11,8 +11,6 @@ import java.util.Scanner;
 public class Party {
     private ArrayList<Character> party = new ArrayList<>();
 
-    // constructor
-
     public Party() {
 
     }
@@ -21,8 +19,6 @@ public class Party {
         this.party = party;
     }
 
-    // setter + getter
-
     public ArrayList<Character> getParty() {
         return party;
     }
@@ -30,8 +26,6 @@ public class Party {
     public void setParty(ArrayList<Character> party) {
         this.party = party;
     }
-
-    // add a Character to party
 
     public void add(Character character) {
         for (int i = 0; i < party.size(); i++) {
@@ -46,7 +40,6 @@ public class Party {
         this.party.add(character);
     }
 
-    // remove Character from party
 
     public void remove(Character character) {
         if (this.party.contains(character)) {
@@ -55,8 +48,6 @@ public class Party {
             System.out.println("Character doesn't exist!");
         }
     }
-
-    // import Party from csv file
 
     public void importParty(String input) {
 
@@ -70,7 +61,7 @@ public class Party {
             while (inputStream.hasNext()) {
                 //read single line, put in string
                 String[] zeile = inputStream.next().split(";");
-                if(zeile.length>1){
+                if (zeile.length > 1) {
 
 
                     switch (zeile[5]) {
@@ -94,15 +85,14 @@ public class Party {
             inputStream.close();
         } catch (FileNotFoundException e) {
 
-                e.printStackTrace();
-            }
-
+            e.printStackTrace();
         }
 
-    // export to csv file
+    }
+
 
     public void exportParty(String inputFile) {
-        //initialize export
+        //initialisiere ausgabe
         String ausgabe = "";
         for (int j = 0; j < this.party.size(); j++) {
             if (this.party.get(j) instanceof Warrior) {
@@ -116,18 +106,17 @@ public class Party {
                         ((Wizard) this.party.get(j)).getIntelligence() + ";Wizard\n";
             }
         }
-        // party is written to csv file
-        try{
+        // Party wird in eine Datei geschrieben
+        try {
 
-            FileWriter fw=new FileWriter(inputFile);
+            FileWriter fw = new FileWriter(inputFile);
             fw.write(ausgabe);
             fw.close();
-            }
-        catch(IOException e){System.out.println(e);}
+        } catch (IOException e) {
+            System.out.println(e);
+        }
 
     }
-
-    // overriding system methods for better usage
 
     @Override
     public String toString() {
@@ -135,7 +124,6 @@ public class Party {
                 "party=" + party +
                 '}';
     }
-
 
     @Override
     public boolean equals(Object o) {

@@ -10,24 +10,24 @@ public class Graveyard {
     public Graveyard() {
     }
 
+
     public Graveyard(ArrayList<Character> graveyard) {
         this.graveyard = graveyard;
     }
 
-
-// add Character to graveyard
     public void died(Character deadChar) {
         this.graveyard.add(deadChar);
         System.out.println(deadChar.getName() + " will be sent to the Graveyard.");
     }
 
-// show graveyard
+    // function muss mit remove from party zusammen in Atack rein -> if hp =< 0
+
     public String seeCasualties() {
         String casualties = "In the big clash of forces died the following Characters: " + "\n";
         String begin = "";
         for (int i = 0; i < this.graveyard.size(); i++) {
 
-            begin = begin + this.graveyard.get(i).getName()  + "\n";
+            begin = begin + this.graveyard.get(i).getName()  + "\n";  // da müssen wir noch mal ran ggf. mit toString-Methode?
         }
         return  casualties + begin;
     }
