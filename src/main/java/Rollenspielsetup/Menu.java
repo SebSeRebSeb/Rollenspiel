@@ -145,9 +145,9 @@ public class Menu {
     }
 
     public void importParty(Party partyOne, Party partyTwo){
-        partyOne.importParty("test");
+        partyOne.importParty("partyOne.csv");
         System.out.println("Party One has been successfully imported!");
-        partyTwo.importParty("test2");
+        partyTwo.importParty("partyTwo.csv");
         System.out.println("Party Two has been successfully imported!");
     }
 
@@ -161,8 +161,8 @@ public class Menu {
                 case "J":
                     //System.out.println(partyOne.exportParty("test1")) ;
                     //System.out.println(partyTwo.exportParty("test2"));
-                    partyOne.exportParty("test1");
-                    partyTwo.exportParty("test2");
+                    partyOne.exportParty("partyOne.csv");
+                    partyTwo.exportParty("partyTwo.csv");
                     System.out.println("Party One has been successfully exported!");
                     System.out.println("Party Two has been successfully exported!");
                     isValidInput=true;
