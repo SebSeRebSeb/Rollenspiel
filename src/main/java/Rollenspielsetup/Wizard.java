@@ -7,15 +7,15 @@ public class Wizard extends Character implements Attacker{
     private int intelligence;
 
 
-    public Wizard(String name) {
-        super(name);
+    public Wizard() {
+//        super(name);
         setHp();
         setMana();
         setIntelligence();
     }
 
     public Wizard( String name, int hp, int mana, int intelligence) {
-        super(name);
+        this.name = name;
         setMana(mana);
         setIntelligence(intelligence);
         setHp(hp);

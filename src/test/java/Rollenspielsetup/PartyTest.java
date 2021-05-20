@@ -27,14 +27,14 @@ class PartyTest {
     public void init(){
         //initialize warriors
         warrior1= new Warrior("Frank",120,12,9);
-        warrior2= new Warrior("Peter");
+        warrior2= new Warrior();
         warrior3= new Warrior("Paul",150,45,5);
-        warrior4= new Warrior("Karl");
+        warrior4= new Warrior();
         //initialize wizards
         wizard1= new Wizard("Ned",65,12,12);
-        wizard2= new Wizard("Ted");
+        wizard2= new Wizard();
         wizard3= new Wizard("Fred",75,45,50);
-        wizard4= new Wizard("Otto");
+        wizard4= new Wizard();
 
         //initialize party1
         party1.add(warrior1);
@@ -71,8 +71,8 @@ class PartyTest {
 
     @Test
     void testAdd(){
-        Warrior warriorNeu = new Warrior("Lukas");
-        Wizard wizardNeu= new Wizard("Thomas");
+        Warrior warriorNeu = new Warrior();
+        Wizard wizardNeu= new Wizard();
 
         party1.add(warriorNeu);
         party2.add(wizardNeu);
@@ -99,9 +99,9 @@ class PartyTest {
     void testImport(){
         Party party3 = new Party();
         warrior1= new Warrior("Frank",120,12,9);
-        warrior2= new Warrior("Peter");
+        warrior2= new Warrior();
         wizard1= new Wizard("Paul",90,45,5);
-        wizard2= new Wizard("Karl");
+        wizard2= new Wizard();
 
 //        System.out.println(warrior1.getId());
 //        System.out.println(warrior2.getId());

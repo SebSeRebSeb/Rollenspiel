@@ -35,7 +35,7 @@ public class Names {
 
             e.printStackTrace();
         }
-        // Zufälligene Namen auswählen
+        // Zufälligen Namen auswählen
         Random randomNumber = new Random();
         int selector = randomNumber.nextInt(result.size());
 
@@ -43,4 +43,6 @@ public class Names {
 
 
     }
+
+        //Filewriter um Liste zu aktualisieren
 }

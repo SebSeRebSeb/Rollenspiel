@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WarriorTest {
     Warrior testWarrior = new Warrior("Frank", 12, 12, 12);
-    Warrior testWarrior2 = new Warrior("Steven");
+    Warrior testWarrior2 = new Warrior();
 
     @Test
     @DisplayName("Hp Test")

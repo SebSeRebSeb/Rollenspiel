@@ -7,8 +7,13 @@ public class Main {
         Party partyOne = new Party();
         Party partyTwo = new Party();
         Menu menu = new Menu();
-//        Wizard steve = new Wizard("Steve");
-//        Warrior klaus = new Warrior("Klaus", 12, 12, 12);
+        Wizard steve = new Wizard();
+        Warrior klaus = new Warrior("Klaus",12, 12, 12);
+
+        //  -- Loop to see how Attack-Method works --
+//        while (klaus.isAlive()) {
+//            steve.attack(klaus);
+//        }
 
 
         menu.startMenu(partyOne,partyTwo);

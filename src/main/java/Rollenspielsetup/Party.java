@@ -3,9 +3,9 @@ package Rollenspielsetup;
 import java.util.ArrayList;
 
 public class Party {
-    private ArrayList<Character> party= new ArrayList<>();
+    private ArrayList<Character> party = new ArrayList<>();
 
-    public Party(){
+    public Party() {
 
     }
 
@@ -21,19 +21,29 @@ public class Party {
         this.party = party;
     }
 
-    public void add(Character character){
+    public void add(Character character) {
+        for (int i = 0; i < party.size(); i++) {
+            if (party.get(i).getName().equals(character.getName())) {
+                character.setName(character.getName() + " jr");
+                this.party.add(character);
+                return;
+            }
+
+
+        }
         this.party.add(character);
     }
 
-    public void remove(Character character){
-        if(this.party.contains(character)) {
+
+    public void remove(Character character) {
+        if (this.party.contains(character)) {
             this.party.remove(character);
         } else {
             System.out.println("Character doesn't exist!");
         }
     }
 
-    public void importParty(String inputString){
+    public void importParty(String inputString) {
         String[] parts = inputString.split("\n");
         String[] zeile;
         for(int i=0;i<parts.length;i++){
@@ -55,17 +65,17 @@ public class Party {
         }
     }
 
-    public String exportParty(){
+    public String exportParty() {
         //initialisiere ausgabe
         String ausgabe = "";
-        for (int j=0; j<this.party.size();j++){
-            if(this.party.get(j) instanceof Warrior) {
-                ausgabe = ausgabe + this.party.get(j).getId() + ";" + this.party.get(j).getName() +";" +
-                                    this.party.get(j).getHp() + ";" + ((Warrior) this.party.get(j)).getStamina() + ";" +
-                                    ((Warrior) this.party.get(j)).getStrength() + ";Warrior\n";
+        for (int j = 0; j < this.party.size(); j++) {
+            if (this.party.get(j) instanceof Warrior) {
+                ausgabe = ausgabe + this.party.get(j).getId() + ";" + this.party.get(j).getName() + ";" +
+                        this.party.get(j).getHp() + ";" + ((Warrior) this.party.get(j)).getStamina() + ";" +
+                        ((Warrior) this.party.get(j)).getStrength() + ";Warrior\n";
             }
-            if(this.party.get(j) instanceof Wizard) {
-                ausgabe = ausgabe + this.party.get(j).getId() + ";" + this.party.get(j).getName() +";" +
+            if (this.party.get(j) instanceof Wizard) {
+                ausgabe = ausgabe + this.party.get(j).getId() + ";" + this.party.get(j).getName() + ";" +
                         this.party.get(j).getHp() + ";" + ((Wizard) this.party.get(j)).getMana() + ";" +
                         ((Wizard) this.party.get(j)).getIntelligence() + ";Wizard\n";
             }

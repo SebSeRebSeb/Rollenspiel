@@ -5,13 +5,13 @@ import java.util.UUID;
 public abstract class Character {
 
     private String id = UUID.randomUUID().toString();
-    private String name;
+    protected String name;
     protected int hp;
     protected boolean isAlive;
 
-    public Character(String name) {
+    public Character() {
 
-        setName(name);
+        setName(Names.getRandomName());
         this.isAlive = true;
     }
 
