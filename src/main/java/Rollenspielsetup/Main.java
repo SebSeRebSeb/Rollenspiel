@@ -9,7 +9,6 @@ public class Main {
         Graveyard graveyard = new Graveyard();
         Menu menu = new Menu();
 
-
         menu.startMenu(partyOne,partyTwo, graveyard);
 
     }
