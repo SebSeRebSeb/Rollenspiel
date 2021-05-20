@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GraveyardTest {
-    Character testWarrior = new Warrior("Gnar");
+    Character testWarrior = new Warrior();
 
     Graveyard testGraveyard = new Graveyard();
 

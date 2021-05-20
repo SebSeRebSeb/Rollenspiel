@@ -27,8 +27,7 @@ public class Graveyard {
         String begin = "";
         for (int i = 0; i < this.graveyard.size(); i++) {
 
-            begin = begin + this.graveyard.get(i).getId() + ";" + this.graveyard.get(i).getName() + ";" +
-                    this.graveyard.get(i).getClass() + "\n";  // da müssen wir noch mal ran ggf. mit toString-Methode?
+            begin = begin + this.graveyard.get(i).getName()  + "\n";  // da müssen wir noch mal ran ggf. mit toString-Methode?
         }
         return  casualties + begin;
     }
@@ -43,4 +42,6 @@ public class Graveyard {
     public void setGraveyard(ArrayList<Character> graveyard) {
         this.graveyard = graveyard;
     }
+
+
 }

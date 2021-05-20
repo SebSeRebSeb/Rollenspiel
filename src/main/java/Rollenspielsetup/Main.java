@@ -1,11 +1,12 @@
 package Rollenspielsetup;
 
-import java.util.ArrayList;
+
 
 public class Main {
     public static void main(String[] args) {
         Party partyOne = new Party();
         Party partyTwo = new Party();
+        Graveyard graveyard = new Graveyard();
         Menu menu = new Menu();
         Wizard steve = new Wizard();
         Warrior klaus = new Warrior("Klaus",12, 12, 12);
@@ -16,7 +17,7 @@ public class Main {
 //        }
 
 
-        menu.startMenu(partyOne,partyTwo);
+        menu.startMenu(partyOne,partyTwo, graveyard);
 
 
 //        System.out.println(steve.getId());

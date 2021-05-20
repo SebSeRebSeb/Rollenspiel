@@ -1,12 +1,11 @@
 package Rollenspielsetup;
 
-import java.sql.SQLOutput;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
 public class Menu {
 
-    public void startMenu(Party partyOne, Party partyTwo) {
+    public void startMenu(Party partyOne, Party partyTwo, Graveyard graveyard) {
         Scanner sc = new Scanner(System.in);
         boolean isValidInput = false;
 
@@ -62,7 +61,7 @@ public class Menu {
             System.out.println("");
 
             fight(char1, char2);
-            Graveyard graveyard = new Graveyard();
+
             if (!char1.isAlive) {
                 partyOne.remove(char1);
                 graveyard.died(char1);
@@ -77,11 +76,15 @@ public class Menu {
         System.out.println("###################The Game is over!#########################");
         System.out.println("#############################################################");
         System.out.println("");
-        if(partyTwo.getParty().isEmpty())
+        if (partyTwo.getParty().isEmpty() && partyOne.getParty().isEmpty()) {
+            System.out.println("#############################################################");
+            System.out.println("###################It's a TIE !##############################");
+            System.out.println("#############################################################");
+        } else if (partyTwo.getParty().isEmpty()) {
             System.out.println("#############################################################");
             System.out.println("###################Party 1 won!##############################");
             System.out.println("#############################################################");
-        if(partyOne.getParty().isEmpty()) {
+        } else if (partyOne.getParty().isEmpty()) {
             System.out.println("#############################################################");
             System.out.println("###################Party 2 won!##############################");
             System.out.println("#############################################################");
@@ -136,26 +139,29 @@ public class Menu {
     public void addCharactertoParty(Party party) {
         Scanner sc = new Scanner(System.in);
         String inputType;
-//       String name;
+        boolean validInput = false;
 
         //Input for type of character
-        System.out.print("Type of character (1=Wizard;2=Warrior): ");
-        inputType=sc.next();
-//        System.out.print("Name of character: ");
-//        name=sc.next();
-        switch(inputType){
-            case "1":
-                Wizard wizard= new Wizard();
-                party.add(wizard);
-                System.out.println("Wizard "+ wizard.getName() + " was created!");
-                break;
-            case "2":
-                Warrior warrior= new Warrior();
-                party.add(warrior);
-                System.out.println("Warrior "+ warrior.getName() + " was created!");
-                break;
-            default:
-                System.out.println("Input not accepted. Choose between Wizard(1) and Warrior(2)"); // funktioniert leider nicht!!
+        while (!validInput) {
+            System.out.print("Type of character (1=Wizard;2=Warrior): ");
+            inputType = sc.next();
+
+            switch (inputType) {
+                case "1":
+                    Wizard wizard = new Wizard();
+                    party.add(wizard);
+                    System.out.println("Wizard " + wizard.getName() + " was created!");
+                    validInput = true;
+                    break;
+                case "2":
+                    Warrior warrior = new Warrior();
+                    party.add(warrior);
+                    System.out.println("Warrior " + warrior.getName() + " was created!");
+                    validInput = true;
+                    break;
+                default:
+                    System.out.println("Input not accepted. Choose between Wizard(1) and Warrior(2)");
+            }
         }
     }
 
