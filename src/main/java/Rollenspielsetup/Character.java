@@ -10,6 +10,7 @@ public abstract class Character {
     protected int hp;
     protected boolean isAlive;
 
+//    Constructor
     public Character() {
 
         setName(Names.getRandomName());

@@ -6,8 +6,9 @@ public class Wizard extends Character implements Attacker{
     private int mana;
     private int intelligence;
 
+//    Constructor
+
     public Wizard() {
-//        super(name);
         setHp();
         setMana();
         setIntelligence();
@@ -20,7 +21,7 @@ public class Wizard extends Character implements Attacker{
         setHp(hp);
     }
 
-    //Attack Method
+    //Attack Method one Character against one Character
     @Override
     public void attack(Character character) {
         int damage;
@@ -41,7 +42,6 @@ public class Wizard extends Character implements Attacker{
             character.setAlive(false);
             System.out.println(character.getName() + " has been slaughtered!");
         }
-        //
     }
 
 
@@ -76,13 +76,14 @@ public class Wizard extends Character implements Attacker{
         }
     }
 
-
+    // Override of setters of parent class Character - Wizard randomly generated
     @Override
     public void setHp(){
         Random random = new Random();
         int hp = 50+random.nextInt(51);
         this.hp = hp;
     }
+    // Override of setters of parent class Character - Wizard generated when hp is given (import)
     @Override
     public void setHp(int hp){
         if (hp >=50 && hp <101){

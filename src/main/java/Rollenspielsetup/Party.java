@@ -11,6 +11,8 @@ import java.util.Scanner;
 public class Party {
     private ArrayList<Character> party = new ArrayList<>();
 
+//    Constructor
+
     public Party() {
 
     }
@@ -19,6 +21,8 @@ public class Party {
         this.party = party;
     }
 
+//    Getter and Setter
+
     public ArrayList<Character> getParty() {
         return party;
     }
@@ -26,7 +30,7 @@ public class Party {
     public void setParty(ArrayList<Character> party) {
         this.party = party;
     }
-
+// add Character to party
     public void add(Character character) {
         for (int i = 0; i < party.size(); i++) {
             if (party.get(i).getName().equals(character.getName())) {
@@ -40,7 +44,7 @@ public class Party {
         this.party.add(character);
     }
 
-
+//remove Character from Party
     public void remove(Character character) {
         if (this.party.contains(character)) {
             this.party.remove(character);
@@ -48,13 +52,13 @@ public class Party {
             System.out.println("Character doesn't exist!");
         }
     }
-
+// import Party from csv file
     public void importParty(String input) {
 
         String fileName = input;
         File file = new File(fileName);
         try {
-            // -Datei mit Scanner auslesen
+
             Scanner inputStream = new Scanner(file);
 
             // hashNext() loops line-by-line
@@ -90,9 +94,8 @@ public class Party {
 
     }
 
-
+// export to csv file
     public void exportParty(String inputFile) {
-        //initialisiere ausgabe
         String ausgabe = "";
         for (int j = 0; j < this.party.size(); j++) {
             if (this.party.get(j) instanceof Warrior) {
@@ -106,7 +109,6 @@ public class Party {
                         ((Wizard) this.party.get(j)).getIntelligence() + ";Wizard\n";
             }
         }
-        // Party wird in eine Datei geschrieben
         try {
 
             FileWriter fw = new FileWriter(inputFile);
@@ -117,7 +119,7 @@ public class Party {
         }
 
     }
-
+// Override System Methods for better User experience
     @Override
     public String toString() {
         return "Party{" +
